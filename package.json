@@ -1,8 +1,8 @@
 {
   "name": "one-list",
   "version": "1.0.0",
-  "description": "One list to rule them all.",
-  "main": "OneList.js",
+  "description": "One list to rule them all. https://en.wikipedia.org/List_of_lists_of_lists",
+  "main": "onelist.js",
   "scripts": {
     "test": "mocha"
   },
