@@ -1,0 +1,11 @@
+{
+  "name": "one-list",
+  "version": "1.0.0",
+  "description": "One list to rule them all.",
+  "main": "OneList.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Brandon Mailhiot",
+  "license": "ISC"
+}
