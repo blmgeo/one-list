@@ -4,6 +4,7 @@ fs = require('fs')
 
 const fileToWrite = 'one-list.json'
 
+//scrape the initial Lists of lists of lists page for links
 scraper
 .StaticScraper
 .create('https://en.wikipedia.org/wiki/List_of_lists_of_lists')
@@ -11,7 +12,7 @@ scraper
 
   const getText = function () {
     let title = $(this).attr('title')
-    //create a scraper for every list
+    //scrape page of each list link
     scraper
     .StaticScraper
     .create('https://en.wikipedia.org' + $(this).attr('href'))
@@ -28,6 +29,5 @@ scraper
       fs.appendFile(fileToWrite, JSON.stringify(res, null, '\t'))
     })
   }
-
   let lists = $('.mw-content-ltr ul li a').map(getText).get()
 })
