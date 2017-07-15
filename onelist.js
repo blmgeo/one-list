@@ -1,33 +1,26 @@
-#!/usr/bin/env node
 const scraper = require('scraperjs'),
-fs = require('fs')
+      fs = require('fs'),
+      fileToWrite = 'one-list.json',
+      url = 'https://en.wikipedia.org',
+      linkSelector = '.mw-content-ltr ul li a',
+      scrape = (page, func) => scraper.StaticScraper.create(url + page).scrape(func)
 
-const fileToWrite = 'one-list.json'
+function writeFile (res) {
+    fs.appendFile(fileToWrite, JSON.stringify(res, null, '\t'))
+}
 
-//scrape the initial Lists of lists of lists page for links
-scraper
-.StaticScraper
-.create('https://en.wikipedia.org/wiki/List_of_lists_of_lists')
-.scrape(function ($) {
+function getPage ($) {
+    function getText() {
+        const title = () => $(this).attr('title'),
+              href  = () => $(this).attr('href'),
+              listObj = () => ({ title: title(), href: href() }),
+              getSubPage = $ => {
+                  const list = $(linkSelector).map(listObj).get()
+                  return { title: title(), list }
+              }
+        scrape(href(), getSubPage).then(writeFile)
+    }
+    $(linkSelector).map(getText).get()
+}
 
-  const getText = function () {
-    let title = $(this).attr('title')
-    //scrape page of each list link
-    scraper
-    .StaticScraper
-    .create('https://en.wikipedia.org' + $(this).attr('href'))
-    .scrape(function ($) {
-      let list = $('.mw-content-ltr ul li a').map(function () {
-        return {
-          title: $(this).attr('title'),
-          href: $(this).attr('href')
-        }
-      }).get()
-      return { title, list }
-    })
-    .then(function (res) {
-      fs.appendFile(fileToWrite, JSON.stringify(res, null, '\t'))
-    })
-  }
-  let lists = $('.mw-content-ltr ul li a').map(getText).get()
-})
+scrape('/wiki/List_of_lists_of_lists', getPage)
