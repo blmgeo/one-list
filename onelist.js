@@ -8,7 +8,7 @@ const scrape = (page, func) => scraper.StaticScraper.create(url + page).scrape(f
 const writeFile = res => fs.appendFile(fileToWrite, JSON.stringify(res, null, '\t'));
 
 scrape('/wiki/List_of_lists_of_lists', ($) => {
-  function getText() {
+  const getText = function getText() {
     const title = $(this).attr('title');
     scrape($(this).attr('href'), () => {
       const list = $(linkSelector).map(function listObj() {
@@ -16,6 +16,6 @@ scrape('/wiki/List_of_lists_of_lists', ($) => {
       }).get();
       return { title, list };
     }).then(writeFile);
-  }
+  };
   $(linkSelector).map(getText).get();
 });
