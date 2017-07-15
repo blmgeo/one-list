@@ -7,5 +7,13 @@
     "test": "mocha"
   },
   "author": "Brandon Mailhiot",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.7.0"
+  },
+  "dependencies": {
+    "scraperjs": "^1.2.0"
+  }
 }
