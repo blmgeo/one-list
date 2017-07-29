@@ -1,0 +1,80 @@
+body {
+  background-color: #f5f5f9;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+header {
+  position: relative;
+   height: 600px;
+   width: 100vw;
+   background-color: #89c;
+   text-align: center;
+   margin-top: 0;
+}
+
+header h1 {
+  position: absolute;
+  color: #fff;
+  font-size: 40px;
+  text-transform: uppercase;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+header p {
+  position: absolute;
+  color: #fff;
+  font-size: 18px;
+  text-transform: uppercase;
+  left: 50%;
+  bottom: 0px;
+  transform: translateX(-50%);
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: 0px auto;
+  position: relative;
+  left: 0;
+}
+
+.list-item {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 3px;
+  border: thin solid #eee;
+  margin: 20px;
+  text-align: center;
+}
+
+#videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+  transition-duration: 1s;
+  margin: 0 auto;
+}
+#videoWrapper iframe {
+	position: absolute;
+	left: 50%;
+  transform: translateX(-50%);
+	width: 50%;
+	height: 50%;
+  margin: 0 auto;
+  margin-top: 80px;
+  transition-duration: 1s;
+}
+
+.search {
+  height: 40px;
+  width: 100%;
+  font-size: 48px;
+  padding: 20px;
+}
