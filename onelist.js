@@ -1,17 +1,29 @@
 const scraper = require('scraperjs')
 const fs = require('fs')
-
 const fileToWrite = 'one-list.json'
+const url = 'https://en.wikipedia.org'
+const selector = '.mw-content-ltr ul li a'
+const s = scraper.StaticScraper.create
 
-scraper.StaticScraper.create('https://en.wikipedia.org/wiki/List_of_lists_of_lists').scrape(function ($) {
-  return $('.mw-content-ltr ul li a').map(function () {
+s(url + '/wiki/List_of_lists_of_lists').scrape(function($) {
+  const getText = function () {
     const title = $(this).attr('title')
-    scraper.StaticScraper.create('https://en.wikipedia.org' + $(this).attr('href')).scrape(function (_) {
-      return _('.mw-content-ltr ul li a').map(function () {
-        return { title: _(this).attr('title'), href: _(this).attr('href') }
+    const href = $(this).attr('href')
+
+    s(url + href).scrape(function($) {
+      let list = $(selector).map(function() {
+        return {
+          title: $(this).attr('title'),
+          href: $(this).attr('href')
+        }
       }).get()
-    }).then(function (res) {
+
+      return { title, list }
+    })
+    .then(function(res) {
       fs.appendFile(fileToWrite, JSON.stringify(res, null, '\t'))
     })
-  }).get()
+  }
+
+  let lists = $(selector).map(getText).get()
 })

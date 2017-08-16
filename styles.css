@@ -7,18 +7,17 @@ body {
 
 header {
   position: relative;
-   height: 600px;
-   width: 100vw;
-   background-color: #89c;
-   text-align: center;
-   margin-top: 0;
+  height: 100px;
+  width: 100vw;
+  background-color: #89c;
+  text-align: center;
+  margin-top: 0;
 }
 
 header h1 {
   position: absolute;
   color: #fff;
   font-size: 40px;
-  text-transform: uppercase;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -51,25 +50,6 @@ header p {
   border: thin solid #eee;
   margin: 20px;
   text-align: center;
-}
-
-#videoWrapper {
-	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 25px;
-	height: 0;
-  transition-duration: 1s;
-  margin: 0 auto;
-}
-#videoWrapper iframe {
-	position: absolute;
-	left: 50%;
-  transform: translateX(-50%);
-	width: 50%;
-	height: 50%;
-  margin: 0 auto;
-  margin-top: 80px;
-  transition-duration: 1s;
 }
 
 .search {

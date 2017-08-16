@@ -8,23 +8,37 @@
 </head>
 
 <body>
-  <div id='container'>
+  <div id="container">
   <header>
-    <h1>Billions and billions of lists!</h1>
-    <div id="videoWrapper">
-      <iframe src="https://www.youtube.com/embed/u_aLESDql1U?autoplay=1" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <p>This may take a while as we prepare all of the lists Wikipedia has to offer.</p>
+    <h1></h1>
   </header>
   </div>
 
   <script>
-    var script = document.createElement('script')
-    script.src = 'one-list.js'
-    setTimeout(function() {
-      document.body.appendChild(script)
-    }, 3000)
-  </script>
-</body>
+    var container = document.querySelector('#container')
+    var url = 'https://en.wikipedia.org'
+    var totalLists = 0
 
+    fetch('one-list.json')
+    .then(res => res.json())
+    .then(lists => {
+      lists.forEach(list => {
+        list.list.forEach(l => {
+          if (l.title) {
+            var item = document.createElement("div")
+            var anchor = document.createElement("a")
+            item.className = "list-item"
+            anchor.textContent = l.title
+            anchor.href = url + l.href
+            item.appendChild(anchor)
+            container.appendChild(item)
+            totalLists++
+          }
+        })
+      })
+      document.querySelector('header h1').textContent = totalLists + ' lists on the wall...'
+    })
+  </script>
+
+</body>
 </html>
